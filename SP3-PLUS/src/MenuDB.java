@@ -29,18 +29,20 @@ public class MenuDB {
         public static void runProgramDB() throws IOException {
 
             DatabaseFileIO database = new DatabaseFileIO();
+            SavedMoviesDB savedMoviesDB = new SavedMoviesDB();
+            WatchedMoviesDB watchedMoviesDB = new WatchedMoviesDB();
 
 
             while (true) {
-                System.out.println("Hvad kunne du tænke dig?\n 1. Se en liste over alle film.\n 2. Se en liste over alle serier.\n 3. Se gemte film og serier.\n 4.Søg");
+                System.out.println("Hvad kunne du tænke dig?\n 1. Se en liste over alle film.\n 2. Se en liste over alle serier.\n 3. Se din liste over gemte film." +
+                        "\n 4. Gem en film. \n 5. Se din liste af sete film. \n 6.Søg");
                 Scanner choice = new Scanner(System.in);
 
 
                 switch (choice.nextLine()) {
                     case "1":
 
-                        database.getMoviesFromDatabase();
-
+                        watchedMoviesDB.addMovieToWatchedMoviesList();
                         break;
 
                     case "2":
@@ -48,10 +50,24 @@ public class MenuDB {
                         database.seriesListDB();
                         break;
 
+                    case "3":
+
+                        savedMoviesDB.getSavedMoviesFromDatabase();
+                        break;
+
+                    case "4":
+
+                        savedMoviesDB.addMovieToSavedMoviesList();
+                        break;
+
+                    case "5":
+
+                        watchedMoviesDB.getWatchedMoviesFromDatabase();
+                        break;
 
                     //Denne case er ligesom vores menu switch hvor vi her kommer til at switche på omend bruger skriver film eller serie.
                     // Så switch case 4 "søg" vil først spørger om hvorvidt man vil søge en film eller serie, for derefter at komme ned til denne case
-                    case "4":
+                    case "6":
                         SearchDB searchDB = new SearchDB();
                         System.out.println("Søger du efter film eller serie?");
                         switch (choice.nextLine()) {
